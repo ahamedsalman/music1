@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <Title>Music Player</Title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <div class="container">
+        <h4>Music Player</h4>
+        <img id="track_image">
+        <P id="title">title.mp3</P>
+        <P id="artist">Artist name</P>
+        <input type="range" id="duration_slider" min="0" max="100" value="0" onclick="change_duration()">
+        <button onclick="previous_song()" id="pre"><i class="fa fa-step-backward"></i></button>
+        <button onclick="justplay()" id="play"><i class="fa fa-play"></i></button>
+        <button onclick="next_song()" id="next"><i class="fa fa-step-forward"></i></button>
+    </div>
+    <script>
+        let previous = document.querySelector('#pre');
+        let play = document.querySelector('#play');
+        let next = document.querySelector('#next');
+        let title = document.querySelector('#title');
+        let artist = document.querySelector('#artist');
+        let slider = document.querySelector('#duration_slider');
+        let track_image = document.querySelector('#track_image');
+
+        let timer;
+        let autoplay = 1;
+
+        let index_no = 0;
+        let plaing_song = false;
+
+        let track = document.createElement('audio');
+
+        let All_song = [{
+
+            name: "First Song",
+            path: "music/track1.mp3",
+            img: "img/img1.jpeg",
+            artist: '"Yuvan sankar raja"'
+        },
+        {
+
+            name: "second Song",
+            path: "music/song1.mp3",
+            img: "img/img1.jpg",
+            artist: '"aniruth"'
+        }, {
+
+            name: "third Song",
+            path: "music/song1.mp3",
+            img: "img/img1.jpg",
+            artist: '"sankar"'
+        },
+        {
+
+            name: "fourth Song",
+            path: "music/song1.mp3",
+            img: "img/img1.jpg",
+            artist: '" raja"'
+        },
+
+
+        ];
+
+        function load_track(index_no) {
+            clearInterval(timer);
+            reset_slider();
+
+            track.src = All_song[index_no].path;
+            title.innerHTML = All_song[index_no].name;
+            track_image.src = All_song[index_no].img;
+            artist.innerHTML = All_song[index_no].artist;
+
+            timer = setInterval(Range_slider, 1000);
+            total.innerHTML = All_song.length;
+            present.innerHTML = index_no + 1;
+        }
+        load_track(index_no);
+
+        function justplay() {
+            if (plaing_song == false) {
+                playsong();
+            }
+            else {
+                pausesong();
+            }
+        }
+
+        function reset_slider() {
+            slider.value = 0;
+        }
+        function playsong() {
+            track.play();
+            plaing_song = true;
+            play.innerHTML = '<i class="fa fa-pause"></i>'
+        }
+        function pausesong() {
+            track.pause();
+            plaing_song = false;
+            play.innerHTML = '<i class="fa fa-play"></i>'
+        }
+
+
+    </script>
+</body>
+
+</html>
