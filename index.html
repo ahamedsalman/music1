@@ -50,21 +50,21 @@
         {
 
             name: "second Song",
-            path: "music/song1.mp3",
-            img: "img/img1.jpg",
+            path: "music/track2.mp3",
+            img: "img/img2.jpeg",
             artist: '"aniruth"'
         }, {
 
             name: "third Song",
-            path: "music/song1.mp3",
-            img: "img/img1.jpg",
+            path: "music/track3.mp3",
+            img: "img/img3.jpeg",
             artist: '"sankar"'
         },
         {
 
             name: "fourth Song",
-            path: "music/song1.mp3",
-            img: "img/img1.jpg",
+            path: "music/track4.mp3",
+            img: "img/img4.jpeg",
             artist: '" raja"'
         },
 
@@ -107,6 +107,38 @@
             track.pause();
             plaing_song = false;
             play.innerHTML = '<i class="fa fa-play"></i>'
+        }
+        function next_song(){
+            if(index_no<All_song.length -1){
+                index_no += 1;
+                load_track(index_no);
+                playsong();
+            }
+            else{
+                index_no = 0;
+                load_track(index_no);
+                playsong();
+
+            }
+        }
+
+        function previous_song(){
+            if(index_no>0){
+                index_no -= 1;
+                load_track(index_no);
+                playsong();
+            }
+            else{
+                index_no = All_song.length;
+                load_track(index_no);
+                playsong();
+                
+            }
+        }
+
+        function change_duration(){
+            slider_position = track.duration * (slider.value/100);
+            track.currentTime = slider_position;
         }
 
 
